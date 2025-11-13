@@ -29,6 +29,8 @@ const syncUser = inngest.createFunction(
       name: newUser.name,
       image: newUser.profileImage,
     });
+
+    // challenge : send welcome email
   }
 );
 
