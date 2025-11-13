@@ -7,6 +7,7 @@ import { serve } from "inngest/express";
 import { inngest, functions } from "./lib/inngest.js";
 import { clerkMiddleware } from "@clerk/express";
 import { protectRoute } from "./middlewares/protectRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js"
 import chatRoutes from './routes/chatRoutes.js'
 
 const app = express();
@@ -20,9 +21,10 @@ app.use(clerkMiddleware()); // this will add auth field to auth object: req.auth
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use('/api/chat',chatRoutes)
+app.use('/api/sessions',sessionRoutes)
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ msg: "Success from api" });
+  res.status(200).json({ message: "Success from api" });
 });
 
 // make our app ready for deployment
